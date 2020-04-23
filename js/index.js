@@ -9,4 +9,17 @@ function addDivs(numCols) {
 
 }
 
-addDivs(16);
+addDivs(25);
+
+
+
+// create node list for all the pixels 
+var pixels = document.querySelectorAll('.pixel');
+
+// iterate through to see if mouse has passed over 
+pixels.forEach(pixel => {
+    pixel.addEventListener('mouseenter', (e) => {
+        pixel.classList.add('pixel_colored');
+    });
+});
+
