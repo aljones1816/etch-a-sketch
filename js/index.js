@@ -26,6 +26,14 @@ pixels.forEach(pixel => {
 
 });
 
+// Iterate through to see if user has clicked, color pixel if yes
+pixels.forEach(pixel => {
+    pixel.addEventListener('mousedown', (e) => {
+        pixel.classList.toggle('pixel_colored');
+    });
+
+});
+
 // this will check to see if the mouse button is being held down
 var mouseDown = 0;
 document.body.onmousedown = function () {
