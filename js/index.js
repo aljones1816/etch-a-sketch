@@ -1,7 +1,7 @@
 function addDivs(numCols) {
     var container = document.getElementById("container");
     container.style.gridTemplateColumns = "repeat(" + numCols + ",1fr)";
-    for (let i=0;i<numCols * numCols;i++) {
+    for (let i = 0; i < numCols * numCols; i++) {
         var newDiv = document.createElement("div");
         newDiv.classList.add("pixel");
         container.appendChild(newDiv);
@@ -9,7 +9,7 @@ function addDivs(numCols) {
 
 }
 
-addDivs(25);
+addDivs(5);
 
 
 
@@ -19,7 +19,18 @@ var pixels = document.querySelectorAll('.pixel');
 // iterate through to see if mouse has passed over 
 pixels.forEach(pixel => {
     pixel.addEventListener('mouseenter', (e) => {
-        pixel.classList.add('pixel_colored');
+        if (mouseDown) {
+            pixel.classList.add('pixel_colored');
+        }
     });
+
 });
 
+// this will check to see if the mouse button is being held down
+var mouseDown = 0;
+document.body.onmousedown = function () {
+    ++mouseDown;
+}
+document.body.onmouseup = function () {
+    --mouseDown;
+}
