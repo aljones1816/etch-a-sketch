@@ -16,9 +16,19 @@ addDivs(5);
 // create node list for all the pixels 
 var pixels = document.querySelectorAll('.pixel');
 
-// iterate through to see if mouse has passed over 
+// iterate through to see if mouse has passed into 
 pixels.forEach(pixel => {
     pixel.addEventListener('mouseenter', (e) => {
+        if (mouseDown) {
+            pixel.classList.add('pixel_colored');
+        }
+    });
+
+});
+
+// iterate through to see if mouse has passed out of
+pixels.forEach(pixel => {
+    pixel.addEventListener('mouseleave', (e) => {
         if (mouseDown) {
             pixel.classList.add('pixel_colored');
         }
@@ -29,6 +39,7 @@ pixels.forEach(pixel => {
 // Iterate through to see if user has clicked, color pixel if yes
 pixels.forEach(pixel => {
     pixel.addEventListener('mousedown', (e) => {
+        e.preventDefault();
         pixel.classList.toggle('pixel_colored');
     });
 
