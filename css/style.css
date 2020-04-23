@@ -1,0 +1,12 @@
+#container {
+    display: grid;
+    height: 100%;
+    width: 100%;
+    background-color: orange;
+    grid-template-columns: repeat(16,1fr);
+}
+
+.pixel {
+    border: 1px;
+    border-color: black;
+}
