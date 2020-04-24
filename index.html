@@ -5,16 +5,17 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
+<body id='body'>
     <div id=controlPanel>
         <input id="numPixels" type="number" min='1' max='100'>
         <button id=setPixels>Change grid size</button>
         <button id="reset">Clear</button>
     </div>
     <div id="etchBody">
-    <div id="container"></div>
-
-</div>
+        <div id="container"></div>
+        <div class="circle left" id="rightLeft"></div>
+        <div class="circle right" id="upDown"></div>
+    </div>
     <script src="js/index.js"></script>
 </body>
 

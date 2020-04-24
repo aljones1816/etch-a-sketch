@@ -1,17 +1,23 @@
 
 var pixels;
+var allDivs;
 
-function addDivs(numCols=16) {
+function addDivs(numCols = 4) {
     var container = document.getElementById("container");
     container.style.gridTemplateColumns = "repeat(" + numCols + ",1fr)";
     for (let i = 0; i < numCols * numCols; i++) {
         var newDiv = document.createElement("div");
         newDiv.classList.add("pixel");
+        newDiv.setAttribute("id", "p" + i);
         container.appendChild(newDiv);
     }
 
     // create node list for all the pixels 
     pixels = document.querySelectorAll('.pixel');
+
+    // create nod list for all divs 
+    allDivs = document.querySelectorAll('div');
+
     // iterate through to see if mouse has passed into 
     pixels.forEach(pixel => {
         pixel.addEventListener('mouseenter', (e) => {
@@ -41,6 +47,12 @@ function addDivs(numCols=16) {
 
     });
 
+    // make sure the user can't click and drag page elements
+    allDivs.forEach(div => {
+        div.addEventListener('mousedown', (e) => {
+            e.preventDefault();
+        })
+    })
 }
 
 addDivs();
@@ -57,6 +69,7 @@ document.body.onmouseup = function () {
 
 // allows user to set the number of pixels in the draing board
 document.getElementById('setPixels').addEventListener('click', (e) => {
+
     let numPixels = document.getElementById('numPixels').value;
     pixels.forEach(pixel => {
         pixel.remove();
@@ -75,4 +88,21 @@ function resetGrid() {
 
 document.getElementById('reset').addEventListener('click', (e) => {
     resetGrid();
+});
+
+let activePix = pixels.length - 1;
+document.getElementById('upDown').addEventListener('click', (e) => {
+
+    console.log("first", activePix);
+    pixels[activePix].classList.add('pixel_colored');
+    activePix = activePix - 4;
+    console.log("second", activePix);
+});
+
+document.getElementById('rightLeft').addEventListener('click', (e) => {
+
+    console.log("first", activePix);
+    pixels[activePix].classList.add('pixel_colored');
+    activePix--;
+    console.log("second", activePix);
 });
