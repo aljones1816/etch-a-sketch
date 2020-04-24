@@ -1,9 +1,12 @@
 
 var pixels;
 var allDivs;
+var rowLen;
 
-function addDivs(numCols = 4) {
+function addDivs(numCols = 16) {
     var container = document.getElementById("container");
+
+    rowLen = numCols;
     container.style.gridTemplateColumns = "repeat(" + numCols + ",1fr)";
     for (let i = 0; i < numCols * numCols; i++) {
         var newDiv = document.createElement("div");
@@ -84,25 +87,46 @@ function resetGrid() {
     pixels.forEach(pixel => {
         pixel.classList.remove('pixel_colored');
     })
+    activePix = pixels.length - 1;
 }
 
 document.getElementById('reset').addEventListener('click', (e) => {
     resetGrid();
 });
 
+
+// use the wheels like a real etch a sketch
 let activePix = pixels.length - 1;
 document.getElementById('upDown').addEventListener('click', (e) => {
-
+    activePix = activePix - rowLen;
     console.log("first", activePix);
     pixels[activePix].classList.add('pixel_colored');
-    activePix = activePix - 4;
+    
     console.log("second", activePix);
 });
 
 document.getElementById('rightLeft').addEventListener('click', (e) => {
-
+    activePix--;
     console.log("first", activePix);
     pixels[activePix].classList.add('pixel_colored');
-    activePix--;
-    console.log("second", activePix);
+    
+
 });
+
+// when a pixel is clicked get its coordinates?
+for (let e = 0; e < pixels.length; e++) {
+    pixels[e].addEventListener('click', function () {
+        activePix=e;
+        console.log(e)
+    });
+}
+
+for (let e = 0; e < pixels.length; e++) {
+    pixels[e].addEventListener('mouseenter', function () {
+        if (mouseDown) {
+            activePix=e;
+            console.log(e);
+        }
+        
+    });
+}

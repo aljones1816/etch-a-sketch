@@ -47,6 +47,12 @@
     right: 0;
 }
 
-.logo {
+#logo {
     color: rgb(209, 161, 37);
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'VT323', monospace;
+    
 }
