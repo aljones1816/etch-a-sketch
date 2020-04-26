@@ -56,6 +56,8 @@ function addDivs(numCols = 16) {
             e.preventDefault();
         })
     })
+
+
 }
 
 addDivs();
@@ -70,17 +72,7 @@ document.body.onmouseup = function () {
     --mouseDown;
 }
 
-// allows user to set the number of pixels in the draing board
-document.getElementById('setPixels').addEventListener('click', (e) => {
 
-    let numPixels = document.getElementById('numPixels').value;
-    pixels.forEach(pixel => {
-        pixel.remove();
-    });
-    addDivs(numPixels);
-
-
-});
 
 // allow user to reset grid by clicking the rest button
 function resetGrid() {
@@ -101,7 +93,15 @@ document.getElementById('upDown').addEventListener('click', (e) => {
     activePix = activePix - rowLen;
     console.log("first", activePix);
     pixels[activePix].classList.add('pixel_colored');
-    
+
+    console.log("second", activePix);
+});
+
+document.getElementById('down').addEventListener('click', (e) => {
+    activePix = activePix + rowLen;
+    console.log("first", activePix);
+    pixels[activePix].classList.add('pixel_colored');
+
     console.log("second", activePix);
 });
 
@@ -109,24 +109,90 @@ document.getElementById('rightLeft').addEventListener('click', (e) => {
     activePix--;
     console.log("first", activePix);
     pixels[activePix].classList.add('pixel_colored');
-    
+
 
 });
 
-// when a pixel is clicked get its coordinates?
+document.getElementById('right').addEventListener('click', (e) => {
+    activePix++;
+    console.log("first", activePix);
+    pixels[activePix].classList.add('pixel_colored');
+
+
+});
+
+// when a pixel is clicked get its coordinates
 for (let e = 0; e < pixels.length; e++) {
     pixels[e].addEventListener('click', function () {
-        activePix=e;
+        activePix = e;
         console.log(e)
     });
 }
 
+// get coordinates when mouse is clicked down
 for (let e = 0; e < pixels.length; e++) {
     pixels[e].addEventListener('mouseenter', function () {
         if (mouseDown) {
-            activePix=e;
+            activePix = e;
             console.log(e);
         }
-        
+
     });
 }
+
+// allows user to set the number of pixels in the drawing board
+document.getElementById('largePixels').addEventListener('click', (e) => {
+    pixels.forEach(pixel => {
+        pixel.remove();
+    });
+
+    addDivs(16);
+    pixels = document.querySelectorAll('.pixel');
+    activePix = pixels.length - 1;
+    // when a pixel is clicked get its coordinates
+    for (let e = 0; e < pixels.length; e++) {
+        pixels[e].addEventListener('click', function () {
+            activePix = e;
+            console.log(e)
+        });
+    }
+
+    // get coordinates when mouse is clicked down
+    for (let e = 0; e < pixels.length; e++) {
+        pixels[e].addEventListener('mouseenter', function () {
+            if (mouseDown) {
+                activePix = e;
+                console.log(e);
+            }
+
+        });
+    }
+});
+
+document.getElementById('smallPixels').addEventListener('click', (e) => {
+    pixels.forEach(pixel => {
+        pixel.remove();
+    });
+
+    addDivs(50);
+    pixels = document.querySelectorAll('.pixel');
+    activePix = pixels.length - 1;
+    // when a pixel is clicked get its coordinates
+    for (let e = 0; e < pixels.length; e++) {
+        pixels[e].addEventListener('click', function () {
+            activePix = e;
+            console.log(e)
+        });
+    }
+
+    // get coordinates when mouse is clicked down
+    for (let e = 0; e < pixels.length; e++) {
+        pixels[e].addEventListener('mouseenter', function () {
+            if (mouseDown) {
+                activePix = e;
+                console.log(e);
+            }
+
+        });
+    }
+});
