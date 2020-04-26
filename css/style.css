@@ -1,9 +1,14 @@
 #etchBody {
     width: 700px;
     height: 700px;
+<<<<<<< HEAD
     background-color: rgb(234,13,13);
+=======
+    background-color: rgb(234, 13, 13);
+>>>>>>> dev
     margin: auto;
     border-radius: 2%;
+    position: absolute;
 }
 
 #container {
@@ -12,6 +17,7 @@
     display: grid;
     height: 500px;
     width: 500px;
+<<<<<<< HEAD
     grid-template-columns: repeat(16,1fr);
     border-radius: 20px;
     
@@ -42,3 +48,48 @@
   .logo {
       color: rgb(209,161,37);
   }
+=======
+    border-radius: 20%;
+}
+
+.pixel {
+  
+    background-color: rgb(173, 172, 167);
+    ;
+}
+
+.pixel_colored {
+  
+    background-color: rgb(50, 52, 49);
+}
+
+.circle {
+    height: 85px;
+    width: 85px;
+    background-color: black;
+    border-radius: 50%;
+    position: absolute;
+    z-index: 2;
+    background-color: rgb(243, 242, 250);
+}
+
+.left {
+    bottom: 0;
+    left: 0;
+}
+
+.right {
+    bottom: 0;
+    right: 0;
+}
+
+#logo {
+    color: rgb(209, 161, 37);
+    position:absolute;
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-family: 'VT323', monospace;
+    
+}
+>>>>>>> dev
