@@ -2,11 +2,21 @@
 var pixels;
 var allDivs;
 var rowLen;
+var rightEdge = [];
+var leftEdge = [];
+var topEdge = [];
+var bottomEdge = [];
+
 
 function addDivs(numCols = 16) {
     var container = document.getElementById("container");
 
     rowLen = numCols;
+    rightEdge = [];
+    leftEdge = [];
+    topEdge = [];
+    bottomEdge = [];
+
     container.style.gridTemplateColumns = "repeat(" + numCols + ",1fr)";
     for (let i = 0; i < numCols * numCols; i++) {
         var newDiv = document.createElement("div");
@@ -57,7 +67,15 @@ function addDivs(numCols = 16) {
         })
     })
 
+    // create lists of the right, left, top, and bottom pixels
+    for (let i = 0; i < rowLen; i++) {
+        rightEdge.push(i * (rowLen) + rowLen - 1);
+        topEdge.push(i);
+        leftEdge.push(i * rowLen);
+        bottomEdge.push(rowLen * (rowLen - 1) + i);
+    }
 
+    console.log('bottom', bottomEdge);
 }
 
 addDivs();
@@ -90,36 +108,48 @@ document.getElementById('reset').addEventListener('click', (e) => {
 // use the wheels like a real etch a sketch
 let activePix = pixels.length - 1;
 document.getElementById('upDown').addEventListener('click', (e) => {
-    activePix = activePix - rowLen;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
-
+    if (topEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix = activePix - rowLen;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
     console.log("second", activePix);
 });
 
 document.getElementById('down').addEventListener('click', (e) => {
-    activePix = activePix + rowLen;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
-
+    if (bottomEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix = activePix + rowLen;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
     console.log("second", activePix);
 });
 
 document.getElementById('rightLeft').addEventListener('click', (e) => {
-    activePix--;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
-
+    if (leftEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix--;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
 
 });
 
 document.getElementById('right').addEventListener('click', (e) => {
-    activePix++;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
+    if (rightEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix++;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
 
-
-});
+    });
 
 // when a pixel is clicked get its coordinates
 for (let e = 0; e < pixels.length; e++) {
