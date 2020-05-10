@@ -106,8 +106,10 @@ document.getElementById('reset').addEventListener('click', (e) => {
 
 
 // use the wheels like a real etch a sketch
-let activePix = pixels.length - 1;
-document.getElementById('upDown').addEventListener('click', (e) => {
+
+// functions to move and color a pixel when the wheel is clicked
+
+function pixelUp() {
     if (topEdge.includes(activePix)) {
         return;
     } else {
@@ -115,10 +117,9 @@ document.getElementById('upDown').addEventListener('click', (e) => {
         console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
-    console.log("second", activePix);
-});
+}
 
-document.getElementById('down').addEventListener('click', (e) => {
+function pixelDown() {
     if (bottomEdge.includes(activePix)) {
         return;
     } else {
@@ -126,10 +127,9 @@ document.getElementById('down').addEventListener('click', (e) => {
         console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
-    console.log("second", activePix);
-});
+}
 
-document.getElementById('rightLeft').addEventListener('click', (e) => {
+function pixelLeft() {
     if (leftEdge.includes(activePix)) {
         return;
     } else {
@@ -137,10 +137,9 @@ document.getElementById('rightLeft').addEventListener('click', (e) => {
         console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
+}
 
-});
-
-document.getElementById('right').addEventListener('click', (e) => {
+function pixelRight() {
     if (rightEdge.includes(activePix)) {
         return;
     } else {
@@ -148,8 +147,39 @@ document.getElementById('right').addEventListener('click', (e) => {
         console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
+}
 
-    });
+let activePix = pixels.length - 1;
+
+
+var timer;
+document.getElementById('up').addEventListener("mousedown", function(){
+     timer=setInterval(function(){
+          pixelUp();
+     }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('down').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelDown();
+    }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('left').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelLeft();
+    }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('right').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelRight();
+    }, 100); // the above code is executed every 100 ms
+});
+document.addEventListener("mouseup", function(){
+    if (timer) clearInterval(timer)
+});
+
+
+
+
 
 // when a pixel is clicked get its coordinates
 for (let e = 0; e < pixels.length; e++) {
