@@ -2,11 +2,21 @@
 var pixels;
 var allDivs;
 var rowLen;
+var rightEdge = [];
+var leftEdge = [];
+var topEdge = [];
+var bottomEdge = [];
+
 
 function addDivs(numCols = 16) {
     var container = document.getElementById("container");
 
     rowLen = numCols;
+    rightEdge = [];
+    leftEdge = [];
+    topEdge = [];
+    bottomEdge = [];
+
     container.style.gridTemplateColumns = "repeat(" + numCols + ",1fr)";
     for (let i = 0; i < numCols * numCols; i++) {
         var newDiv = document.createElement("div");
@@ -57,7 +67,15 @@ function addDivs(numCols = 16) {
         })
     })
 
+    // create lists of the right, left, top, and bottom pixels
+    for (let i = 0; i < rowLen; i++) {
+        rightEdge.push(i * (rowLen) + rowLen - 1);
+        topEdge.push(i);
+        leftEdge.push(i * rowLen);
+        bottomEdge.push(rowLen * (rowLen - 1) + i);
+    }
 
+    console.log('bottom', bottomEdge);
 }
 
 addDivs();
@@ -88,38 +106,80 @@ document.getElementById('reset').addEventListener('click', (e) => {
 
 
 // use the wheels like a real etch a sketch
+
+// functions to move and color a pixel when the wheel is clicked
+
+function pixelUp() {
+    if (topEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix = activePix - rowLen;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
+}
+
+function pixelDown() {
+    if (bottomEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix = activePix + rowLen;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
+}
+
+function pixelLeft() {
+    if (leftEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix--;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
+}
+
+function pixelRight() {
+    if (rightEdge.includes(activePix)) {
+        return;
+    } else {
+        activePix++;
+        console.log("first", activePix);
+        pixels[activePix].classList.add('pixel_colored');
+    }
+}
+
 let activePix = pixels.length - 1;
-document.getElementById('upDown').addEventListener('click', (e) => {
-    activePix = activePix - rowLen;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
 
-    console.log("second", activePix);
+
+var timer;
+document.getElementById('up').addEventListener("mousedown", function(){
+     timer=setInterval(function(){
+          pixelUp();
+     }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('down').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelDown();
+    }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('left').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelLeft();
+    }, 100); // the above code is executed every 100 ms
+});
+document.getElementById('right').addEventListener("mousedown", function(){
+    timer=setInterval(function(){
+         pixelRight();
+    }, 100); // the above code is executed every 100 ms
+});
+document.addEventListener("mouseup", function(){
+    if (timer) clearInterval(timer)
 });
 
-document.getElementById('down').addEventListener('click', (e) => {
-    activePix = activePix + rowLen;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
-
-    console.log("second", activePix);
-});
-
-document.getElementById('rightLeft').addEventListener('click', (e) => {
-    activePix--;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
 
 
-});
 
-document.getElementById('right').addEventListener('click', (e) => {
-    activePix++;
-    console.log("first", activePix);
-    pixels[activePix].classList.add('pixel_colored');
-
-
-});
 
 // when a pixel is clicked get its coordinates
 for (let e = 0; e < pixels.length; e++) {

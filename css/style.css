@@ -1,3 +1,8 @@
+* {
+    margin: 0;
+    padding: 0;
+  }
+
 #etchBody {
     width: 700px;
     height: 700px;
@@ -5,10 +10,19 @@
     background-color: rgb(234,13,13);
 =======
     background-color: rgb(234, 13, 13);
+<<<<<<< HEAD
 >>>>>>> dev
     margin: auto;
     border-radius: 2%;
+=======
+>>>>>>> dev
     position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 5%;
+    
 }
 
 #container {
@@ -63,33 +77,96 @@
     background-color: rgb(50, 52, 49);
 }
 
-.circle {
-    height: 85px;
-    width: 85px;
-    background-color: black;
+
+
+#largePixels {
+    width: 40px;
+    height: 40px;
+    background: rgb(243, 242, 250);
+    top: 30px;
+    left: 20px;
+    position: absolute;
+    z-index: 2;
+}
+
+#smallPixels {
+    width: 20px;
+    height: 20px;
+    background: rgb(243, 242, 250);
+    top: 40px;
+    left: 70px;
+    position: absolute;
+    z-index: 2;
+}
+
+#reset {
+    width: 40px;
+    height: 40px;
+    background: rgb(233, 188, 181);
     border-radius: 50%;
     position: absolute;
     z-index: 2;
-    background-color: rgb(243, 242, 250);
+    top: 30px;
+    right: 20px;
 }
 
 .left {
-    bottom: 0;
-    left: 0;
+    bottom: 15px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-top: 35px solid transparent;
+    border-right: 70px solid rgb(243, 242, 250);
+    border-bottom: 35px solid transparent ;
+    position: absolute;
+    z-index: 2;
 }
 
 .right {
-    bottom: 0;
-    right: 0;
+    bottom: 15px;
+    left: 100px;
+    width: 0;
+    height: 0;
+    border-top: 35px solid transparent;
+    border-left: 70px solid rgb(243, 242, 250);
+    border-bottom: 35px solid transparent;
+    position: absolute;
+    z-index: 2;
+}
+
+.up {
+    bottom: 15px;
+    right: 55px;
+    width: 0;
+    height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 70px solid rgb(243, 242, 250);
+    position: absolute;
+    z-index: 2;
+}
+
+.down {
+    bottom: 15px;
+    right: 100px;
+    width: 0;
+    height: 0;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-top: 70px solid rgb(243, 242, 250);
+    position: absolute;
+    z-index: 2;
 }
 
 #logo {
     color: rgb(209, 161, 37);
     position:absolute;
+    
     width: 100%;
     text-align: center;
     font-size: 3em;
     font-family: 'VT323', monospace;
+    top: 25px;
     
 }
 >>>>>>> dev
