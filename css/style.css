@@ -3,7 +3,9 @@
     padding: 0;
   }
 
- 
+  body {
+    overflow: hidden; /* Hide scrollbars */
+  }
 
 #etchBody {
     width: 600px;
