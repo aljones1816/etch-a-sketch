@@ -36,20 +36,12 @@ function addDivs(numCols = 16) {
         pixel.addEventListener('mouseenter', (e) => {
             if (mouseDown) {
                 pixel.classList.add('pixel_colored');
-            }
+            } 
         });
 
     });
 
-    // iterate through to see if mouse has passed out of
-    pixels.forEach(pixel => {
-        pixel.addEventListener('mouseleave', (e) => {
-            if (mouseDown) {
-                pixel.classList.add('pixel_colored');
-            }
-        });
-
-    });
+    
 
     // Iterate through to see if user has clicked, color pixel if yes
     pixels.forEach(pixel => {
@@ -74,8 +66,6 @@ function addDivs(numCols = 16) {
         leftEdge.push(i * rowLen);
         bottomEdge.push(rowLen * (rowLen - 1) + i);
     }
-
-    console.log('bottom', bottomEdge);
 }
 
 addDivs();
@@ -83,16 +73,17 @@ addDivs();
 
 // this will check to see if the mouse button is being held down
 var mouseDown = 0;
-document.body.onmousedown = function () {
-    ++mouseDown;
+onmousedown = function () {
+    mouseDown=1;
+    
 }
-document.body.onmouseup = function () {
-    --mouseDown;
+onmouseup = function () {
+    mouseDown = 0;
 }
 
 
 
-// allow user to reset grid by clicking the rest button
+// allow user to reset grid by clicking the reset button
 function resetGrid() {
     pixels.forEach(pixel => {
         pixel.classList.remove('pixel_colored');
@@ -114,7 +105,6 @@ function pixelUp() {
         return;
     } else {
         activePix = activePix - rowLen;
-        console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
 }
@@ -124,7 +114,6 @@ function pixelDown() {
         return;
     } else {
         activePix = activePix + rowLen;
-        console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
 }
@@ -134,7 +123,6 @@ function pixelLeft() {
         return;
     } else {
         activePix--;
-        console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
 }
@@ -144,7 +132,6 @@ function pixelRight() {
         return;
     } else {
         activePix++;
-        console.log("first", activePix);
         pixels[activePix].classList.add('pixel_colored');
     }
 }
@@ -156,36 +143,47 @@ var timer;
 document.getElementById('up').addEventListener("mousedown", function(){
      timer=setInterval(function(){
           pixelUp();
-     }, 100); // the above code is executed every 100 ms
+     }, 75); // the above code is executed every 100 ms
 });
 document.getElementById('down').addEventListener("mousedown", function(){
     timer=setInterval(function(){
          pixelDown();
-    }, 100); // the above code is executed every 100 ms
+    }, 75); // the above code is executed every 100 ms
 });
 document.getElementById('left').addEventListener("mousedown", function(){
     timer=setInterval(function(){
          pixelLeft();
-    }, 100); // the above code is executed every 100 ms
+    }, 75); // the above code is executed every 100 ms
 });
 document.getElementById('right').addEventListener("mousedown", function(){
     timer=setInterval(function(){
          pixelRight();
-    }, 100); // the above code is executed every 100 ms
+    }, 75); // the above code is executed every 100 ms
 });
 document.addEventListener("mouseup", function(){
     if (timer) clearInterval(timer)
 });
 
+document.addEventListener('keydown', function (pressed) {
+    if (pressed.key == 'ArrowUp') {
+        pixelUp();
+    } else if (pressed.key == 'ArrowDown') {
+        pixelDown();
+    } else if (pressed.key == 'ArrowRight') {
+        pixelRight();
+    } else if (pressed.key == 'ArrowLeft') {
+        pixelLeft();
+    } else if (pressed.key == 'c') {
+        resetGrid();
+    }
 
-
-
+})
 
 // when a pixel is clicked get its coordinates
 for (let e = 0; e < pixels.length; e++) {
     pixels[e].addEventListener('click', function () {
         activePix = e;
-        console.log(e)
+        
     });
 }
 
@@ -194,7 +192,7 @@ for (let e = 0; e < pixels.length; e++) {
     pixels[e].addEventListener('mouseenter', function () {
         if (mouseDown) {
             activePix = e;
-            console.log(e);
+            
         }
 
     });
@@ -213,7 +211,6 @@ document.getElementById('largePixels').addEventListener('click', (e) => {
     for (let e = 0; e < pixels.length; e++) {
         pixels[e].addEventListener('click', function () {
             activePix = e;
-            console.log(e)
         });
     }
 
@@ -222,7 +219,6 @@ document.getElementById('largePixels').addEventListener('click', (e) => {
         pixels[e].addEventListener('mouseenter', function () {
             if (mouseDown) {
                 activePix = e;
-                console.log(e);
             }
 
         });
@@ -241,7 +237,6 @@ document.getElementById('smallPixels').addEventListener('click', (e) => {
     for (let e = 0; e < pixels.length; e++) {
         pixels[e].addEventListener('click', function () {
             activePix = e;
-            console.log(e)
         });
     }
 
@@ -250,9 +245,73 @@ document.getElementById('smallPixels').addEventListener('click', (e) => {
         pixels[e].addEventListener('mouseenter', function () {
             if (mouseDown) {
                 activePix = e;
-                console.log(e);
             }
 
         });
     }
+});
+
+
+
+// This distaster adds highlighting to button when hovered over - need to clean up later... Challenge is 
+// that the arrows are styled by adding a border depending on the direction, hard to see how to combine into simple function
+
+document.getElementById("right").addEventListener("mouseover", function() {
+    document.getElementById("right").style.borderLeft = "70px solid rgb(211, 211, 211)";
+});
+    
+
+document.getElementById("right").addEventListener("mouseout", function() {
+    document.getElementById("right").style.borderLeft = "70px solid rgb(243, 242, 250)";
+});
+
+document.getElementById("left").addEventListener("mouseover", function() {
+    document.getElementById("left").style.borderRight = "70px solid rgb(211, 211, 211)";
+});
+    
+
+document.getElementById("left").addEventListener("mouseout", function() {
+    document.getElementById("left").style.borderRight = "70px solid rgb(243, 242, 250)";
+});
+
+document.getElementById("up").addEventListener("mouseover", function() {
+    document.getElementById("up").style.borderBottom = "70px solid rgb(211, 211, 211)";
+});
+    
+
+document.getElementById("up").addEventListener("mouseout", function() {
+    document.getElementById("up").style.borderBottom = "70px solid rgb(243, 242, 250)";
+});
+
+document.getElementById("down").addEventListener("mouseover", function() {
+    document.getElementById("down").style.borderTop = "70px solid rgb(211, 211, 211)";
+});
+    
+
+document.getElementById("down").addEventListener("mouseout", function() {
+    document.getElementById("down").style.borderTop = "70px solid rgb(243, 242, 250)";
+});
+
+document.getElementById("largePixels").addEventListener("mouseover", function() {
+    document.getElementById("largePixels").style.backgroundColor = "rgb(211, 211, 211)";
+});
+
+document.getElementById("largePixels").addEventListener("mouseout", function() {
+    document.getElementById("largePixels").style.backgroundColor = "rgb(243, 242, 250)";
+});
+
+document.getElementById("smallPixels").addEventListener("mouseover", function() {
+    document.getElementById("smallPixels").style.backgroundColor = "rgb(211, 211, 211)";
+});
+
+document.getElementById("smallPixels").addEventListener("mouseout", function() {
+    document.getElementById("smallPixels").style.backgroundColor = "rgb(243, 242, 250)";
+});
+    
+document.getElementById("reset").addEventListener("mouseover", function() {
+    document.getElementById("reset").style.backgroundColor = "rgb(220, 175, 169)";
+});
+
+document.getElementById("reset").addEventListener("mouseout", function() {
+    document.getElementById("reset").style.backgroundColor = "rgb(233, 188, 181)";
 });

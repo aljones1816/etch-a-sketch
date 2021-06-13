@@ -3,9 +3,11 @@
     padding: 0;
   }
 
+ 
+
 #etchBody {
-    width: 700px;
-    height: 700px;
+    width: 600px;
+    height: 600px;
     background-color: rgb(234,13,13);
     margin: auto;
     position: absolute;
@@ -21,8 +23,8 @@
     margin: auto;
     padding: 100px;
     display: grid;
-    height: 500px;
-    width: 500px;
+    height: 400px;
+    width: 400px;
     border-radius: 20%;
 }
 
@@ -128,4 +130,13 @@
     font-family: 'VT323', monospace;
     top: 25px;
     
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
